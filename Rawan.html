@@ -1,392 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مغامرات روان وكرومي | كنز الجزيرة المفقودة</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e6f7ff;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            color: #ff6b9e;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        h2 {
-            color: #5e9eff;
-            font-size: 1.8em;
-        }
-        
-        .scene-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 3px solid #ffd166;
-        }
-        
-        .character-intro {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        .character-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 15px;
-            object-fit: cover;
-            border: 3px solid #5e9eff;
-        }
-        
-        .quiz {
-            background-color: #f0f8ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 2px dashed #5e9eff;
-        }
-        
-        .question {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #2d5985;
-            font-weight: bold;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .option {
-            background-color: #ffd1dc;
-            padding: 10px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid #ff9eb5;
-        }
-        
-        .option:hover {
-            background-color: #ff9eb5;
-            color: white;
-        }
-        
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 1.2em;
-            min-height: 30px;
-            color: #4CAF50;
-        }
-        
-        .next-btn, .restart-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: all 0.3s;
-        }
-        
-        .next-btn:hover, .restart-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 25px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 30px;
-            background-color: #ff9eb5;
-            width: 0%;
-            transition: width 0.5s;
-            text-align: center;
-            line-height: 30px;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .treasure {
-            font-size: 3em;
-            margin: 20px 0;
-            animation: bounce 1s infinite alternate;
-        }
-        
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-15px); }
-        }
-        
-        .celebration {
-            animation: celebration 2s;
-        }
-        
-        @keyframes celebration {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        .emoji {
-            font-size: 1.5em;
-            margin: 0 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>مغامرات روان وكرومي</h1>
-        <h2>كنز الجزيرة المفقودة</h2>
-        
-        <div class="character-intro">
-            <img src="https://i.imgur.com/JQ6Yl3P.png" alt="روان" class="character-img">
-            <img src="https://i.imgur.com/mN3k5ZD.png" alt="كرومي" class="character-img">
-        </div>
-        
-        <p>مرحبًا! أنا <strong>روان</strong>، وهذا صديقي <strong>كرومي</strong>. لقد وجدنا خريطة غامضة تقود إلى كنز مخفي على جزيرة بعيدة! هل يمكنك مساعدتنا في حل الألغاز والعثور عليه؟ هيا نبدأ المغامرة!</p>
-        
-        <div class="progress-bar">
-            <div class="progress" id="progress">0%</div>
-        </div>
-        
-        <!-- المشهد 1 -->
-        <div id="scene1">
-            <img src="https://i.imgur.com/5X2w3Qq.jpg" alt="زجاجة على الشاطئ" class="scene-img">
-            <div class="quiz">
-                <div class="question">انظر! هناك زجاجة غريبة! ماذا يمكن أن تكون بداخلها؟</div>
-                <div class="options">
-                    <div class="option" onclick="checkAnswer(1, 'a')">أ) رسالة سرية</div>
-                    <div class="option" onclick="checkAnswer(1, 'b')">ب) عصير ليمون</div>
-                    <div class="option" onclick="checkAnswer(1, 'c')">ج) سمكة صغيرة</div>
-                </div>
-                <div class="result" id="result1"></div>
-            </div>
-        </div>
-        
-        <!-- المشهد 2 -->
-        <div id="scene2" class="hidden">
-            <img src="https://i.imgur.com/8vZ9Y7T.jpg" alt="رسالة مشفرة" class="scene-img">
-            <div class="quiz">
-                <div class="question">هذه الرسالة مكتوبة بشفرة! إليك الدليل:<br>
-                    🍎 = A<br>
-                    🐱 = B<br>
-                    🌙 = C<br>
-                    فما معنى 🌙🍎🐱؟
-                </div>
-                <div class="options">
-                    <div class="option" onclick="checkAnswer(2, 'a')">أ) ABC</div>
-                    <div class="option" onclick="checkAnswer(2, 'b')">ب) CAB</div>
-                    <div class="option" onclick="checkAnswer(2, 'c')">ج) BAC</div>
-                </div>
-                <div class="result" id="result2"></div>
-            </div>
-        </div>
-        
-        <!-- المشهد 3 -->
-        <div id="scene3" class="hidden">
-            <img src="https://i.imgur.com/KYjW0lE.jpg" alt="أشجار في الغابة" class="scene-img">
-            <div class="quiz">
-                <div class="question">أي من هذه الأشجار هي النخلة الذهبية؟</div>
-                <div class="options">
-                    <div class="option" onclick="checkAnswer(3, 'a')">أ) الشجرة ذات الأوراق الخضراء</div>
-                    <div class="option" onclick="checkAnswer(3, 'b')">ب) الشجرة ذات الثمار الصفراء اللامعة</div>
-                    <div class="option" onclick="checkAnswer(3, 'c')">ج) الشجرة العالية جدًا</div>
-                </div>
-                <div class="result" id="result3"></div>
-            </div>
-        </div>
-        
-        <!-- المشهد 4 (لغز إضافي) -->
-        <div id="scene4" class="hidden">
-            <img src="https://i.imgur.com/9QZq3Jj.jpg" alt="صندوق مقفل" class="scene-img">
-            <div class="quiz">
-                <div class="question">الصندوق مقفل! هناك 3 مفاتيح:<br>
-                    المفتاح الأحمر: سيفتح إذا كان 2+2=5<br>
-                    المفتاح الأزرق: سيفتح إذا كان 3×3=9<br>
-                    المفتاح الذهبي: سيفتح إذا كان 5-2=2<br>
-                    أي مفتاح يجب أن نستخدمه؟
-                </div>
-                <div class="options">
-                    <div class="option" onclick="checkAnswer(4, 'a')">أ) المفتاح الأحمر</div>
-                    <div class="option" onclick="checkAnswer(4, 'b')">ب) المفتاح الأزرق</div>
-                    <div class="option" onclick="checkAnswer(4, 'c')">ج) المفتاح الذهبي</div>
-                </div>
-                <div class="result" id="result4"></div>
-            </div>
-        </div>
-        
-        <!-- المشهد 5 (لغز إضافي) -->
-        <div id="scene5" class="hidden">
-            <img src="https://i.imgur.com/p3WqL0m.jpg" alt="جسر متحرك" class="scene-img">
-            <div class="quiz">
-                <div class="question">علينا عبور هذا الجسر! هناك تعليمات:<br>
-                    - يمكن عبور شخصين فقط في المرة الواحدة<br>
-                    - يجب أن يحمل أحدهم مصباحًا<br>
-                    - روان تعبر أسرع من كرومي<br>
-                    كيف نعبر بأسرع طريقة؟
-                </div>
-                <div class="options">
-                    <div class="option" onclick="checkAnswer(5, 'a')">أ) روان تعبر أولاً ثم تعود بالمصباح</div>
-                    <div class="option" onclick="checkAnswer(5, 'b')">ب) كرومي يعبر أولاً ثم يعود بالمصباح</div>
-                    <div class="option" onclick="checkAnswer(5, 'c')">ج) يعبران معًا ثم يعود أحدهما بالمصباح</div>
-                </div>
-                <div class="result" id="result5"></div>
-            </div>
-        </div>
-        
-        <!-- المشهد النهائي -->
-        <div id="finalScene" class="hidden">
-            <div class="treasure">💎✨💰</div>
-            <img src="https://i.imgur.com/VvJkQlE.jpg" alt="العثور على الكنز" class="scene-img celebration">
-            <h2>لقد وجدنا الكنز!</h2>
-            <p>واو! شكرًا لك على مساعدتنا في حل كل هذه الألغاز! لقد وجدنا كنزًا رائعًا مليئًا بالعملات الذهبية والمجوهرات اللامعة!</p>
-            <p>كانت هذه مغامرة رائعة! هل تريد أن تلعب مرة أخرى؟</p>
-            <button class="restart-btn" onclick="restartGame()">اللعب مرة أخرى</button>
-        </div>
-        
-        <button id="nextBtn" class="next-btn hidden" onclick="nextScene()">التالي</button>
-    </div>
-
-    <script>
-        let currentScene = 1;
-        let score = 0;
-        const totalScenes = 5;
-        
-        function checkAnswer(sceneNum, selectedOption) {
-            let correctAnswer;
-            let resultText = "";
-            
-            // تحديد الإجابة الصحيحة لكل مشهد
-            switch(sceneNum) {
-                case 1:
-                    correctAnswer = 'a';
-                    resultText = selectedOption === correctAnswer ? 
-                        "أحسنت! إنها رسالة سرية. لنفتحها معًا!" : 
-                        "ليس تمامًا! دعنا نحاول مرة أخرى.";
-                    break;
-                case 2:
-                    correctAnswer = 'b';
-                    resultText = selectedOption === correctAnswer ? 
-                        "صحيح! 🌙🍎🐱 = CAB. الرسالة تقول: 'اتجهوا نحو النخلة الذهبية!'" : 
-                        "هذه ليست الإجابة الصحيحة. تذكر أن 🌙 = C و 🍎 = A و 🐱 = B";
-                    break;
-                case 3:
-                    correctAnswer = 'b';
-                    resultText = selectedOption === correctAnswer ? 
-                        "رائع! النخلة الذهبية هي تلك ذات الثمار الصفراء اللامعة. هناك صندوق تحتها!" : 
-                        "ليس هذه الشجرة. ابحث عن الشجرة ذات الثمار الصفراء اللامعة.";
-                    break;
-                case 4:
-                    correctAnswer = 'b';
-                    resultText = selectedOption === correctAnswer ? 
-                        "ذكي جدًا! 3×3=9 صحيح، لذا المفتاح الأزرق هو الصحيح!" : 
-                        "هذا المفتاح لن يفتح الصندوق. تحقق من الحسابات مرة أخرى.";
-                    break;
-                case 5:
-                    correctAnswer = 'a';
-                    resultText = selectedOption === correctAnswer ? 
-                        "إجابة ممتازة! روان الأسرع يجب أن تعبر أولاً ثم تعود بالمصباح." : 
-                        "هذه الطريقة ستأخذ وقتًا أطول. فكر في من الأسرع بيننا!";
-                    break;
-            }
-            
-            // عرض النتيجة
-            document.getElementById(`result${sceneNum}`).textContent = resultText;
-            
-            // إذا كانت الإجابة صحيحة، المضي قدمًا
-            if (selectedOption === correctAnswer) {
-                score++;
-                updateProgress();
-                document.getElementById('nextBtn').classList.remove('hidden');
-            }
-        }
-        
-        function nextScene() {
-            document.getElementById(`scene${currentScene}`).classList.add('hidden');
-            currentScene++;
-            
-            if (currentScene <= totalScenes) {
-                document.getElementById(`scene${currentScene}`).classList.remove('hidden');
-            } else {
-                // نهاية اللعبة
-                document.getElementById('finalScene').classList.remove('hidden');
-            }
-            
-            document.getElementById('nextBtn').classList.add('hidden');
-        }
-        
-        function updateProgress() {
-            const progressPercentage = Math.floor((score / totalScenes) * 100);
-            const progressBar = document.getElementById('progress');
-            progressBar.style.width = `${progressPercentage}%`;
-            progressBar.textContent = `${progressPercentage}%`;
-        }
-        
-        function restartGame() {
-            currentScene = 1;
-            score = 0;
-            
-            // إخفاء جميع المشاهد وإظهار الأول فقط
-            for (let i = 1; i <= totalScenes; i++) {
-                document.getElementById(`scene${i}`).classList.add('hidden');
-            }
-            document.getElementById('scene1').classList.remove('hidden');
-            
-            // إخفاء المشهد النهائي
-            document.getElementById('finalScene').classList.add('hidden');
-            
-            // مسح النتائج
-            for (let i = 1; i <= totalScenes; i++) {
-                document.getElementById(`result${i}`).textContent = '';
-            }
-            
-            // إعادة تعيين شريط التقدم
-            updateProgress();
-            document.getElementById('nextBtn').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
